@@ -21,8 +21,6 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-
-
         boolean workCondition = true;
         int[] arrayForInput;
         int arraySize;
