@@ -26,26 +26,28 @@ import java.util.Map;
     }
 }
 */
-public class FractionNew {
+public class FractionNew<T extends Number> {
     private Map<String, Fraction> fractionMap = new HashMap<>();
-    private Map<String, Double> doubleValueCache = new HashMap<>(); // Кэш для вещественных значений
+    private Map<String, Double> doubleValueCache = new HashMap<>();
 
-    public Fraction getFraction(int numerator, int denominator) {
+    public FractionNew(){}
+
+    public Fraction getFraction(T numerator, T denominator) {
         String key = numerator + "/" + denominator;
         if (!fractionMap.containsKey(key)) {
-            Fraction fraction = new Fraction(numerator, denominator);
+            Fraction fraction = new Fraction((int)numerator, (int)denominator);
             fractionMap.put(key, fraction);
-            doubleValueCache.put(key, fraction.getDoubleValue()); // Кэшируем вещественное значение
+            doubleValueCache.put(key, fraction.getDoubleValue());
         }
         return fractionMap.get(key);
     }
-    public double getDoubleValue(int numerator, int denominator) {
+    public double getDoubleValue(T numerator, T denominator) {
         String key = numerator + "/" + denominator;
         if (doubleValueCache.containsKey(key)) {
-            return doubleValueCache.get(key); // Возвращаем кэшированное значение
+            return doubleValueCache.get(key);
         } else {
             Fraction fraction = getFraction(numerator, denominator);
-            return fraction.getDoubleValue(); // Вычисляем и кэшируем
+            return fraction.getDoubleValue();
         }
     }
 }

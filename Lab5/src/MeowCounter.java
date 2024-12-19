@@ -1,13 +1,12 @@
-public class MeowCounter implements Meowable {
+public class MeowCounter<T extends Meowable> {
     private Meowable meowable;
     private int meowCount;
 
-    public MeowCounter(Meowable meowable) {
+    public MeowCounter(T meowable) {
         this.meowable = meowable;
         this.meowCount = 0;
     }
 
-    @Override
     public void meow() {
         meowable.meow();
         meowCount++;

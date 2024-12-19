@@ -30,16 +30,31 @@ public class Main {
         Cat cat = new Cat("Барсик");
         MeowCounter meowCounter = new MeowCounter(cat);
 
-        System.out.println(cat.toString());
+        System.out.println(cat);
         for (int i = 0; i < 5; i++) {
             meowCounter.meow();
         }
         System.out.println("Meow count: " + meowCounter.getMeowCount());
     }
 
+    public static <T> List<T> getUniqueElements(List<T> L1, List<T> L2) {
+        List<T> result = new ArrayList<>();
+        for (T element : L1) {
+            if (!L2.contains(element) && result.indexOf(element) == -1) {
+                result.add(element);
+            }
+        }
+        for (T element : L2) {
+            if (!L1.contains(element) && result.indexOf(element) == -1) {
+                result.add(element);
+            }
+        }
+        return result;
+    }
+
     public static void Task3(){
         System.out.println("-----Задание №3-----");
-        List<Integer> L1 = Arrays.asList(1, 1, 2, 3, 4, 5);
+        /*List<Integer> L1 = Arrays.asList(1, 1, 2, 3, 4, 5);
         List<Integer> L2 = Arrays.asList(4, 5, 6, 7, 8);
 
         List<Integer> L = new ArrayList<>();
@@ -56,7 +71,11 @@ public class Main {
             }
         }
 
-        System.out.println(L);
+        System.out.println(L);*/
+        List<Integer> L1 = Arrays.asList(1, 1, 2, 3, 4, 5);
+        List<Integer> L2 = Arrays.asList(4, 5, 6, 7, 8);
+        List<Integer> result = getUniqueElements(L1, L2);
+        System.out.println(result);
     }
 
     private static int getIntInput(Scanner scanner, String errorMessage) {
@@ -142,7 +161,17 @@ public class Main {
             File file = new File("src/Task5.txt");
             Scanner scanner = new Scanner(file);
 
-            StringBuilder builder = new StringBuilder();
+            Set<Character> digits = new HashSet<>();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                for (char c : line.toCharArray()) {
+                    if (Character.isDigit(c)) {
+                        digits.add(c);
+                    }
+                }
+            }
+            /*StringBuilder builder = new StringBuilder();
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -151,11 +180,11 @@ public class Main {
                         builder.append(c + " ");
                     }
                 }
-            }
+            }*/
             scanner.close();
 
             System.out.println("Цифры, которые встречаются в тексте:");
-            System.out.println(builder);
+            System.out.println(digits);
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден");
         }
@@ -175,11 +204,38 @@ public class Main {
         return true;
     }
 
+    public static <T> boolean checkEquality(Queue<T> queue, int i, int j) {
+        if (i < 0 || j >= queue.size() || i >= j) {
+            return false;
+        }
+
+        Queue<T> temp = new LinkedList<>(queue);
+        for (int k = 0; k < i; k++) {
+            temp.poll();
+        }
+
+        T element = temp.poll();
+        for (int k = i + 1; k <= j; k++) {
+            T nextElement = temp.poll();
+            if (!element.equals(nextElement)) {
+                return false;
+            }
+            element = nextElement;
+        }
+
+        return true;
+    }
+
     public static void Task6() {
-        int[] queue = {1, 2, 2, 2, 2, 2, 1, 3};
-        int i = 1;
-        int j = 5;
-        System.out.println(checkEquality(queue, i, j));
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(1);
+        queue.add(2);
+        queue.add(2);
+        queue.add(3);
+        queue.add(2);
+        queue.add(2);
+        System.out.println(checkEquality(queue, 1, 5));
+        System.out.println(checkEquality(queue, 1, 2));
     }
 
     public static void Task7_1(){
@@ -208,12 +264,12 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        Task1();
+        //Task1();
         //Task2();
         //Task3();
         //Task4();
         //Task5();
-        //Task6();
+        Task6();
         //Task7_1();
         //Task7_2();
     }
