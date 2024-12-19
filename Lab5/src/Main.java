@@ -11,18 +11,18 @@ public class Main {
 
     public static void Task1(){
         System.out.println("-----Задание №1-----");
-        System.out.println("Надо ввести три дроби.");
-        FractionNew f = new FractionNew(1, 1);
-        System.out.println("Запись числа в виде обыкновенной дроби: " + f);
-        System.out.println("Запись в виде десятичной дроби: " + f.getDoubleValue());
+        FractionNew fnew = new FractionNew();
+        System.out.println("Запись числа в виде обыкновенной дроби: " + fnew.getFraction(1, 1));
+        System.out.println("Запись в виде десятичной дроби: " + fnew.getDoubleValue(1, 1));
 
-        f = new FractionNew(1, 2);
-        System.out.println("Запись числа в виде обыкновенной дроби: " + f);
-        System.out.println("Запись в виде десятичной дроби: " + f.getDoubleValue());
+        System.out.println("Запись числа в виде обыкновенной дроби: " + fnew.getFraction(1, 2));
+        System.out.println("Запись в виде десятичной дроби: " + fnew.getDoubleValue(1, 2));
 
-        f = new FractionNew(1, -3);
-        System.out.println("Запись числа в виде обыкновенной дроби: " + f);
-        System.out.println("Запись в виде десятичной дроби: " + f.getDoubleValue());
+        System.out.println("Запись числа в виде обыкновенной дроби: " + fnew.getFraction(1, 3));
+        System.out.println("Запись в виде десятичной дроби: " + fnew.getDoubleValue(1, 3));
+
+        System.out.println("Запись числа в виде обыкновенной дроби: " + fnew.getFraction(3, 7));
+        System.out.println("Запись в виде десятичной дроби: " + fnew.getDoubleValue(3, 7));
     }
 
     public static  void Task2(){
@@ -196,7 +196,7 @@ public class Main {
         Map<Integer, String> result = Files.lines(Paths.get("src/Task7.txt"))
                 .map(line -> line.split(":"))
                 .filter(arr -> arr.length == 2 && !arr[1].isEmpty())
-                .collect(Collectors.groupingBy(
+                .collect( Collectors.groupingBy(
                         arr -> Integer.parseInt(arr[1]),
                         Collectors.mapping(
                                 arr -> arr[0].substring(0, 1).toUpperCase() + arr[0].substring(1).toLowerCase(),
@@ -208,13 +208,13 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        //Task1();
+        Task1();
         //Task2();
         //Task3();
         //Task4();
         //Task5();
         //Task6();
         //Task7_1();
-        Task7_2();
+        //Task7_2();
     }
 }

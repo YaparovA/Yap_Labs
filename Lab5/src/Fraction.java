@@ -1,5 +1,5 @@
 
-public class Fraction{
+public class Fraction implements FractionOperations{
     private int numerator;
     private int denominator;
 
@@ -50,6 +50,16 @@ public class Fraction{
         if (!(obj instanceof Fraction)) return false;
         Fraction other = (Fraction) obj;
         return this.numerator == other.numerator && this.denominator == other.denominator;
+    }
+
+    @Override
+    public double getDoubleValue() {
+        return (double) numerator / denominator;
+    }
+    @Override
+    public void setValue(int numerator, int denominator) {
+        setNumerator(numerator);
+        setDenominator(denominator);
     }
 
 }
