@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+ <body layout:fragment="body" class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Page Content-->
+            <div class="container">
+			    <h1>Города</h1>
+			    <table class="table table-striped">
+			      <tr>
+			        <th>Id</th>
+			        <th>Город</th>
+			        <th>Дата создания</th>
+    			    <th>Дата обновления</th>
+			        <th>Действия</th>
+			      </tr>
+			      <tr th:each="city : ${cities}">
+			        <td th:text="${city.id}">Id</td>
+			        <td th:text="${city.name}">Name</td>
+			        <td th:text="${city.createdOn}">CreatedOn</td>
+			        <td th:text="${city.updatedOn}">UpdatedOn</td>
+			        <td>
+			          <a th:href="@{/cities/{cityId}/edit(cityId=${city.id})}" class="btn btn-primary">Редактировать</a>
+			          <a th:href="@{/cities/{cityId}/delete(cityId=${city.id})}" class="btn btn-danger">Удалить</a>
+			        </td>
+			      </tr>
+			    </table>
+			    <a th:href="@{/cities/create}" class="btn btn-success">Добавить город</a>
+			</div>
+        </main>
+    </body>
+</html>

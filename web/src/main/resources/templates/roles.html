@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+ <body layout:fragment="body" class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Page Content-->
+            <div class="container">
+			    <h1>Роли</h1>
+			    <table class="table table-striped">
+			      <tr>
+			        <th>Id</th>
+			        <th>Name</th>
+			        <th>Дата создания</th>
+    			    <th>Дата обновления</th>
+			        <th>Действия</th>
+			      </tr>
+			      <tr th:each="role : ${roles}">
+			        <td th:text="${role.id}">Id</td>
+			        <td th:text="${role.name}">Name</td>
+			        <td th:text="${role.createdOn}">CreatedOn</td>
+			        <td th:text="${role.updatedOn}">UpdatedOn</td>
+			        <td>
+			          <a th:href="@{/roles/{roleId}/edit(roleId=${role.id})}" class="btn btn-primary">Редактировать</a>
+			          <a th:href="@{/roles/{roleId}/delete(roleId=${role.id})}" class="btn btn-danger">Удалить</a>
+			        </td>
+			      </tr>
+			    </table>
+			    <a th:href="@{/roles/create}" class="btn btn-success">Создать роль</a>
+			</div>
+        </main>
+    </body>
+</html>

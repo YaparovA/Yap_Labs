@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<body layout:fragment="body">
+	<div class="container">
+	  <h1>Редактировать город</h1>
+	  <form role="form" th:object="${city}" method="post" id="city-form" th:action="@{/cities/{cityId}/edit(cityId=${city.id})}">
+	    <input type="hidden" th:field="*{id}">
+	    <div class="form-group">
+	      <label for="name" class="mb-2">Название города</label>
+	      <input type="text" id="name" th:field="*{name}" class="form-control">
+	      <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+	    </div>
+	    <div class="mt-2 d-flex justify-content-end">
+	      <button type="submit" class="btn btn-primary">Сохранить</button>
+	    </div>
+	  </form>
+	</div>
+</body>
+</html>

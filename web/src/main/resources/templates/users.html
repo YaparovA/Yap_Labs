@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+ <body layout:fragment="body" class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <div class="container">
+			    <h1>Пользователи</h1>
+			    <table class="table table-striped">
+			      <tr>
+			        <th>Id</th>
+			        <th>Имя</th>
+			        <th>Возраст</th>
+			        <th>Город</th>
+			        <th>Роль</th>
+			        <th>Дата создания</th>
+    			    <th>Дата обновления</th>
+			        <th>Действия</th>
+			      </tr>
+			      <tr th:each="user : ${users}">
+			        <td th:text="${user.id}">Id</td>
+			        <td th:text="${user.name}">Name</td>
+			        <td th:text="${user.age}">Age</td>
+			        <td th:text="${user.city.name}">City</td>
+			        <td th:text="${user.role.name}">Role</td>
+			        <td th:text="${user.createdOn}">CreatedOn</td>
+			        <td th:text="${user.updatedOn}">UpdatedOn</td>
+			        <td>
+			          <a th:href="@{/users/{userId}/edit(userId=${user.id})}" class="btn btn-primary">Редактировать</a>
+			          <a th:href="@{/users/{userId}/delete(userId=${user.id})}" class="btn btn-danger">Удалить</a>
+			        </td>
+			      </tr>
+			    </table>
+			    <a th:href="@{/users/create}" class="btn btn-success">Создать пользователя</a>
+			</div>
+        </main>
+    </body>
+</html>

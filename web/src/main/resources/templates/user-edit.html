@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body layout:fragment="body">
+  <div class="container">
+      <h1>Редактировать пользователя</h1>
+      <form role="form" th:object="${user}" method="post" id="user-form" th:action="@{/users/{userId}/edit(userId=${user.id})}">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+          <label for="name" class="mb-2">Имя пользователя</label>
+          <input type="text" id="name" th:field="*{name}"  class="form-control">
+          <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+        </div>
+        <div class="form-group">
+          <label for="age" class="mb-2">Возраст пользователя</label>
+          <input type="number" id="age" th:field="*{age}" class="form-control">
+          <p th:if="${#fields.hasErrors('age')}" class="text-danger" th:errors="*{age}"></p>
+        </div>
+        <div class="form-group">
+          <label for="roleId" class="mb-2">Роль пользователя</label>
+          <select id="role" name="roleId" class="form-control">
+          	<option value="0" selected>Выберите роль</option>
+            <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
+            th:selected="${role.id == user.role.id}"></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cityId" class="mb-2">Город пользователя</label>
+          <select id="city" name="cityId" class="form-control">
+          	<option value="0" selected>Выберите город</option>
+            <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"
+            th:selected="${city.id == user.city.id}"></option>
+          </select>
+        </div>
+        <p th:if="${error != null}" th:text="${error}" class="text-danger"></p>
+        <div class="mt-2 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+  </div>
+</body>
+</html>
+            
